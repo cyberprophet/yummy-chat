@@ -14,11 +14,15 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     final ls = context.findAncestorStateOfType<LoginScreenState>()!;
 
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(
+        milliseconds: 500,
+      ),
+      curve: Curves.easeIn,
       padding: const EdgeInsets.all(
         20,
       ),
-      height: 280,
+      height: ls.isSignupScreen ? 280 : 250,
       width: MediaQuery.of(context).size.width - 40,
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
@@ -42,9 +46,10 @@ class _LoginFormState extends State<LoginForm> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
-                onTap: () => setState(
-                  () => ls.isSignupScreen = false,
-                ),
+                onTap: () {
+                  setState(() => ls.isSignupScreen = false);
+                  ls.setState(() => ls.isSignupScreen = false);
+                },
                 child: Column(
                   children: [
                     Text(
@@ -70,9 +75,10 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
               GestureDetector(
-                onTap: () => setState(
-                  () => ls.isSignupScreen = true,
-                ),
+                onTap: () {
+                  setState(() => ls.isSignupScreen = true);
+                  ls.setState(() => ls.isSignupScreen = true);
+                },
                 child: Column(
                   children: [
                     Text(
@@ -99,113 +105,189 @@ class _LoginFormState extends State<LoginForm> {
               )
             ],
           ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: 20,
-            ),
-            child: Form(
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.account_circle,
-                        color: Palette.iconColor,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+          if (ls.isSignupScreen)
+            Container(
+              margin: const EdgeInsets.only(
+                top: 20,
+              ),
+              child: Form(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                          color: Palette.iconColor,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        hintText: 'name',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
                           color: Palette.textColor1,
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(35),
-                        ),
+                        contentPadding: EdgeInsets.all(10),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Palette.textColor1,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(35),
-                        ),
-                      ),
-                      hintText: 'User Name',
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                        color: Palette.textColor1,
-                      ),
-                      contentPadding: EdgeInsets.all(10),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.account_circle,
-                        color: Palette.iconColor,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Palette.textColor1,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(35),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Palette.textColor1,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(35),
-                        ),
-                      ),
-                      hintText: 'User Name',
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                        color: Palette.textColor1,
-                      ),
-                      contentPadding: EdgeInsets.all(10),
+                    const SizedBox(
+                      height: 8,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.account_circle,
-                        color: Palette.iconColor,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Palette.iconColor,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        hintText: 'email',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
                           color: Palette.textColor1,
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(35),
-                        ),
+                        contentPadding: EdgeInsets.all(10),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Palette.textColor1,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(35),
-                        ),
-                      ),
-                      hintText: 'User Name',
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                        color: Palette.textColor1,
-                      ),
-                      contentPadding: EdgeInsets.all(10),
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: Palette.iconColor,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        hintText: 'password',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          color: Palette.textColor1,
+                        ),
+                        contentPadding: EdgeInsets.all(10),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
+          if (!ls.isSignupScreen)
+            Container(
+              margin: const EdgeInsets.only(
+                top: 20,
+              ),
+              child: Form(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Palette.iconColor,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        hintText: 'email',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          color: Palette.textColor1,
+                        ),
+                        contentPadding: EdgeInsets.all(10),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: Palette.iconColor,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Palette.textColor1,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(35),
+                          ),
+                        ),
+                        hintText: 'password',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          color: Palette.textColor1,
+                        ),
+                        contentPadding: EdgeInsets.all(10),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );
