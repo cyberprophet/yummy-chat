@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yummy_chat/config/palette.dart';
 import 'package:yummy_chat/widgets/login_form_widget.dart';
+import 'package:yummy_chat/widgets/submit_btn_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,8 +11,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  bool isSignupScreen = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,17 +40,17 @@ class LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RichText(
-                      text: const TextSpan(
+                      text: TextSpan(
                         text: 'Welcome',
-                        style: TextStyle(
+                        style: const TextStyle(
                           letterSpacing: 1,
                           fontSize: 25,
                           color: Colors.white,
                         ),
                         children: [
                           TextSpan(
-                            text: ' to Yummy chat!',
-                            style: TextStyle(
+                            text: isSignupScreen ? ' to Yummy chat!' : ' back',
+                            style: const TextStyle(
                               letterSpacing: 1,
                               fontSize: 25,
                               color: Colors.white,
@@ -64,9 +63,9 @@ class LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 5,
                     ),
-                    const Text(
-                      'signup to continue',
-                      style: TextStyle(
+                    Text(
+                      'Sign${isSignupScreen ? "up" : "in"} to continue',
+                      style: const TextStyle(
                         letterSpacing: 1,
                         color: Colors.white,
                       ),
@@ -76,12 +75,57 @@ class LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          Positioned(
+          const AnimatedPositioned(
+            duration: Duration(
+              milliseconds: 500,
+            ),
+            curve: Curves.easeIn,
             top: 180,
             child: LoginForm(),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(
+              milliseconds: 500,
+            ),
+            curve: Curves.easeIn,
+            top: isSignupScreen ? 430 : 390,
+            right: 0,
+            left: 0,
+            child: const SubmitButton(),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height - 155,
+            right: 0,
+            left: 0,
+            child: Column(
+              children: [
+                Text(
+                  'or Sign${isSignupScreen ? "up" : "in"} with',
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    backgroundColor: Colors.transparent,
+                    maximumSize: const Size(
+                      180,
+                      48,
+                    ),
+                  ),
+                  child: Image.asset(
+                    'assets/images/btn_google_signin_light_normal.png',
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
+
+  bool isSignupScreen = false;
 }
