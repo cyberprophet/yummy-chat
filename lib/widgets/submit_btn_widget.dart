@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yummy_chat/screens/login_screen.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton({super.key});
@@ -16,32 +17,37 @@ class SubmitButton extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(50),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [
-                Colors.orange,
-                Colors.red,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: const Offset(
-                  0,
-                  1,
-                ),
+        child: GestureDetector(
+          onTap: () => context
+              .findAncestorStateOfType<LoginScreenState>()!
+              .tryValidation(),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [
+                  Colors.orange,
+                  Colors.red,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-            ],
-          ),
-          child: const Icon(
-            Icons.arrow_forward,
-            color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3),
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  offset: const Offset(
+                    0,
+                    1,
+                  ),
+                ),
+              ],
+            ),
+            child: const Icon(
+              Icons.arrow_forward,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
