@@ -127,6 +127,7 @@ class _LoginFormState extends State<LoginForm> {
                           return null;
                         },
                         onSaved: (newValue) => ls.userName = newValue ?? '',
+                        onChanged: (value) => ls.userName = value,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.account_circle,
@@ -160,6 +161,7 @@ class _LoginFormState extends State<LoginForm> {
                         height: 8,
                       ),
                       TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         key: const ValueKey(2),
                         validator: (value) {
                           if (value!.isEmpty || !value.contains('@')) {
@@ -168,6 +170,7 @@ class _LoginFormState extends State<LoginForm> {
                           return null;
                         },
                         onSaved: (newValue) => ls.userEmail = newValue ?? '',
+                        onChanged: (value) => ls.userEmail = value,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.email,
@@ -201,6 +204,7 @@ class _LoginFormState extends State<LoginForm> {
                         height: 8,
                       ),
                       TextFormField(
+                        obscureText: true,
                         key: const ValueKey(3),
                         validator: (value) {
                           if (value!.isEmpty || value.length < 6) {
@@ -209,6 +213,7 @@ class _LoginFormState extends State<LoginForm> {
                           return null;
                         },
                         onSaved: (newValue) => ls.userPassword = newValue ?? '',
+                        onChanged: (value) => ls.userPassword = value,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.lock,
@@ -252,6 +257,7 @@ class _LoginFormState extends State<LoginForm> {
                   child: Column(
                     children: [
                       TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         key: const ValueKey(4),
                         validator: (value) {
                           if (value!.isEmpty || !value.contains('@')) {
@@ -260,6 +266,7 @@ class _LoginFormState extends State<LoginForm> {
                           return null;
                         },
                         onSaved: (newValue) => ls.userEmail = newValue ?? '',
+                        onChanged: (value) => ls.userEmail = value,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.email,
@@ -293,6 +300,7 @@ class _LoginFormState extends State<LoginForm> {
                         height: 8,
                       ),
                       TextFormField(
+                        obscureText: true,
                         key: const ValueKey(5),
                         validator: (value) {
                           if (value!.isEmpty || value.length < 6) {
@@ -301,6 +309,7 @@ class _LoginFormState extends State<LoginForm> {
                           return null;
                         },
                         onSaved: (newValue) => ls.userPassword = newValue ?? '',
+                        onChanged: (value) => ls.userPassword = value,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.lock,
