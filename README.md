@@ -1,16 +1,2 @@
-# yummy_chat
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src=https://user-images.githubusercontent.com/48705422/223896343-900b1222-c9f1-4a42-8241-637d48fca5c6.png height=385/>
+<blockquote>LogIn</blockquote>
