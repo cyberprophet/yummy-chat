@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:yummy_chat/config/palette.dart';
-import 'package:yummy_chat/widgets/login_form_widget.dart';
-import 'package:yummy_chat/widgets/submit_btn_widget.dart';
+import 'package:yummy_chat/widgets/logins/login_form_widget.dart';
+import 'package:yummy_chat/widgets/logins/submit_btn_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

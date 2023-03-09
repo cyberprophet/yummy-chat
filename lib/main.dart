@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:yummy_chat/screens/chat_screen.dart';
 import 'package:yummy_chat/screens/login_screen.dart';
 
 Future<void> main() async {
@@ -18,7 +20,11 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) =>
+            snapshot.hasData ? const ChatScreen() : const LoginScreen(),
+      ),
     );
   }
 }

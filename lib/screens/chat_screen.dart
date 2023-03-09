@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:yummy_chat/config/palette.dart';
+import 'package:yummy_chat/widgets/chats/message_widget.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -18,13 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () async {
-              await _authentication.signOut();
-
-              if (context.mounted) {
-                Navigator.pop(context);
-              }
-            },
+            onPressed: () => _authentication.signOut(),
             icon: const Icon(
               Icons.logout_outlined,
               color: Colors.white,
@@ -33,37 +26,14 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
         title: const Text('Chat'),
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('chats/TzIkysHScBhqYwGIDgaf/message')
-            .snapshots(),
-        builder: (BuildContext context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.hasData) {
-            final docs = snapshot.data!.docs;
-            return ListView.builder(
-              itemBuilder: (context, index) => Container(
-                padding: const EdgeInsets.all(
-                  8,
-                ),
-                child: Text(
-                  docs[index]['text'],
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-              itemCount: docs.length,
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(
-                Palette.googleColor,
-              ),
+      body: Container(
+        child: Column(
+          children: const [
+            Expanded(
+              child: Messages(),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

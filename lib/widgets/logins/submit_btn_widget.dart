@@ -1,9 +1,10 @@
+
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:yummy_chat/screens/chat_screen.dart';
 import 'package:yummy_chat/screens/login_screen.dart';
 
 class SubmitButton extends StatefulWidget {
@@ -43,21 +44,17 @@ class _SubmitButtonState extends State<SubmitButton> {
                   email: ls.userEmail,
                   password: digest.toString(),
                 );
+                await FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(sub.user?.uid)
+                    .set({
+                  'userName': ls.userName,
+                  'email': ls.userEmail,
+                });
               } else {
                 sub = await ls.authentication.signInWithEmailAndPassword(
                   email: ls.userEmail,
                   password: digest.toString(),
-                );
-              }
-              if (context.mounted) {
-                return;
-              }
-              if (sub.user != null) {
-                Navigator.push(
-                  ls.context,
-                  MaterialPageRoute(
-                    builder: (_) => const ChatScreen(),
-                  ),
                 );
               }
             } catch (e) {
@@ -68,7 +65,9 @@ class _SubmitButtonState extends State<SubmitButton> {
                 ),
               );
             }
-            ls.setState(() => ls.showSpinner = false);
+            if (ls.mounted) {
+              ls.setState(() => ls.showSpinner = false);
+            }
           },
           child: Container(
             decoration: BoxDecoration(
